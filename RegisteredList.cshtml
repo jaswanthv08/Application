@@ -1,0 +1,77 @@
+﻿@model IEnumerable<ClaimsManagementSystem.Models.UserDetail>
+@{
+    ViewBag.Title = "RegisteredList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>RegisteredList</h2>
+
+<h2>List Of Registered Members</h2>
+<hr />
+<style>
+    table {
+        border-collapse: collapse;
+    }
+
+    tr {
+        border: 1px ridge lightgray;
+        border-left: none;
+        border-right: none;
+    }
+
+
+    th {
+        padding-top: 20px;
+        padding-right: 100px;
+        padding-bottom: 20px;
+    }
+
+        th:first-child {
+            padding-left: 20px;
+        }
+
+    tr:first-child {
+        border-top: none;
+    }
+
+    td:first-child {
+        padding-left: 20px;
+    }
+
+    tr:last-child {
+        border-bottom: none;
+    }
+
+    td {
+        padding-bottom: 20px;
+        padding-right: 30px;
+        padding-top: 20px;
+    }
+</style>
+
+<table>
+    <tr>
+        <th>@Html.DisplayNameFor(m => m.UserCredential_UserId)
+        <th>@Html.DisplayNameFor(m => m.FirstName)</th>
+        <th>@Html.DisplayNameFor(m => m.LastName)</th>
+        <th>@Html.DisplayNameFor(m => m.DateOfBirth)</th>
+        <th>@Html.DisplayNameFor(m => m.Gender)</th>
+        <th>@Html.DisplayNameFor(m => m.ContactNumber)</th>
+        <th>@Html.DisplayNameFor(m => m.UserCredential.Role.Name)</th>
+        <th>Action</th>
+    </tr>
+    @foreach (var element in Model)
+    {
+        <tr>
+            <td>@element.UserCredential_UserId</td>
+            <td>@element.FirstName</td>
+            <td>@element.LastName</td>
+            <td>@element.DateOfBirth.ToString("yyyy-MM-dd") </td>
+            <td>@element.ContactNumber</td>
+            <td>@element.UserCredential.Role.Name</td>
+            <td>@Html.ActionLink("Approve", "ApproveRegistration", "Claim", new { id = element.UserCredential_UserId }, null)</td>
+            <td>@Html.ActionLink("Reject", "RejectRegistration", "Claim", new { id = element.UserCredential_UserId }, null)</td>
+        </tr>
+
+    }
+</table>
